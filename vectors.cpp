@@ -2,20 +2,7 @@
 #include <cmath>
 #include <cfloat>
 
-// a macro for comparing floating point numbers
-#define CMP(x, y)   \
-    (fabsf((x) - (y)) <= FLT_EPSILON * \
-        fmaxf(1.0f, \
-        fmaxf(fabsf(x), fabsf(y)))  \
-    )
-// absolute tolerance epsilon test
-#define ABSOLUTE(x, y) (fabsf((x) - (y)) <= FLT_EPSILON)
-// relative tolerance epsilon test
-#define RELATIVE(x, y)  \
-    (fabsf((x) - (y)) <= FLT_EPSILON * Max(fabsf(x), fabsf(y)))
-
-
-// implementation of basic vector operations
+//***************** implementation of Chapter 1 basic operations
 vec2 operator+(const vec2& l, const vec2& r)
 {
     return {l.x + r.x, l.y + r.y};
@@ -131,3 +118,67 @@ vec3 Normalized(const vec3& v)
     return v * (1.0f / Magnitude(v));
 }
 
+vec3 Cross(const vec3& l, const vec3& r)
+{
+    vec3 result;
+    
+    result.x = (l.y * r.z) - (l.z * r.y);
+    result.y = (l.z * r.x) - (l.x * r.z);
+    result.z = (l.x * r.y) - (l.y * r.x);
+
+    return result;
+}
+
+//ANGLES GIVEN IN RADIANS
+float Angle(const vec2& l, const vec2& r) 
+{
+    float m = sqrtf(MagnitudeSq(l) * MagnitudeSq(r));
+    return acos(Dot(l, r) / m);
+}
+
+float Angle(const vec3& l, const vec3& r)
+{
+    float m = sqrtf(MagnitudeSq(l) * MagnitudeSq(r));
+    return acos(Dot(l, r) / m);
+}
+
+vec2 Projection(const vec2& length, const vec2& direction)
+{
+    // the vector being projected is length
+    // the vector it is being projected onto is represented by direction
+    float dot = Dot(length, direction);
+    float magSq = MagnitudeSq(direction);
+    return direction * (dot / magSq);
+}
+
+vec3 Projection(const vec3& length, const vec3& direction)
+{
+    float dot = Dot(length, direction);
+    float magSq = MagnitudeSq(direction);
+    return direction * (dot / magSq);
+}
+
+vec2 Perpendicular(const vec2& length, const vec2& direction) 
+{
+    return length - Projection(length, direction);
+}
+vec3 Perpendicular(const vec3& length, const vec3& direction) 
+{
+    return length - Projection(length, direction);
+}
+
+vec2 Reflection(const vec2& vec, const vec2& normal)
+{
+    float d = Dot(vec, normal);
+    return vec - normal * (d * 2.0f);
+}
+
+vec3 Reflection(const vec3& vec, const vec3& normal)
+{
+    float d = Dot(vec, normal);
+    return vec - normal * (d * 2.0f);
+}
+
+//*************
+
+//************* Chapter 2 - Matrices
