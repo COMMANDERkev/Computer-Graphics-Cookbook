@@ -59,7 +59,6 @@ bool operator!=(const vec3 &l, const vec3 &r)
     return !(l == r);
 }
 
-// implementation of basic vector functions
 float Dot(const vec2& l, const vec2& r)
 {
     return (l.x * r.x) + (l.y * r.y);
@@ -181,4 +180,3 @@ vec3 Reflection(const vec3& vec, const vec3& normal)
 
 //*************
 
-//************* Chapter 2 - Matrices

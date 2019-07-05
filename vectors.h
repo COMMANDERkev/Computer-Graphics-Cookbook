@@ -57,8 +57,8 @@ typedef struct vec3
     }
 } vec3;
 
-// method def
-vec2 operator+(const vec2& l, const vec2& r);
+//***************** implementation of Chapter 1 basic operations
+vec2 operator+(const vec2 &l, const vec2 &r);
 vec3 operator+(const vec3 &l, const vec3 &r);
 
 vec2 operator-(const vec2 &l, const vec2 &r);
@@ -105,27 +105,7 @@ vec3 Perpendicular(const vec3& len, const vec3& dir);
 vec2 Reflection(const vec2& vec, const vec2& normal);
 vec3 Reflection(const vec3& vec, const vec3& normal);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//*************
 
 
 #endif
